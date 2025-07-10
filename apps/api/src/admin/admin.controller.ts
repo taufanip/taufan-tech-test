@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Patch, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { AdminService } from "./admin.service";
-import { CreateAdminDto } from "./dtos/create-admin.dto";
+import { CreateAdminDto, UpdateAdminDTO } from "./dtos/create.admin.dto";
 
 @Controller("admin")
 export class AdminController {
@@ -12,12 +12,21 @@ export class AdminController {
     } 
 
     @Get()
-    findMany(){
-        return this.adminService.findMany();
+    GetAll(){
+        return this.adminService.getAll();
     }  
     
     @Patch(':id')
-    update(@Param('id') id: number, @Body() dto: CreateAdminDto){
-        return this.adminService.update(+id, dto);
+    async update(
+        @Param('id') id: number,
+        @Body() dto: UpdateAdminDTO,
+    ){
+        return this.adminService.update(id, dto);
+    }
+
+    @Delete(':id')
+    async delete(
+        @Param('id') id: number){
+        return this.adminService.delete(id);
     } 
 }

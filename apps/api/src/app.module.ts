@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AdminModule } from './admin/admin.module';
 import { join } from 'path';
+import { EmployeeModule } from './employee/employee.module';
+import { EmployeeLeaveModule } from './employeeLeave/employeeLeave.module';
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { join } from 'path';
       inject: [ConfigService],
     }),
 
-    AdminModule
+    AdminModule,
+    EmployeeModule,
+    EmployeeLeaveModule
   ],
   controllers: [AppController],
   providers: [AppService]
